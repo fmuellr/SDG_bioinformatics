@@ -17,7 +17,13 @@ We will also install some Apps on your laptop, such as Visual Studio Code, R Stu
 These guides are written from the Mac point of view, if you have windows - i can't help you. Just kidding, this information can also be applied for Windows. There are some slight modifications in our setup but the actual data analysis will be the same more or less. 
 
 ### Visual Studio Code 
-To write, edit, and view your scripts we need a text editor. While your laptop has a built in text editor (aka the textEdit app), it is very limited. I'd recommed using [Visual Studio Code] (https://code.visualstudio.com), it's a great app for code editing that comes with additional features such as code debugging, GitHub connection, and supports a ton of languages. It's my favourite editor (what im currently using to write this document in) and is great for writing scripts and working with your files. 
+To write, edit, and view your scripts we need a text editor. While your laptop has a built in text editor (aka the textEdit app), it is very limited. I'd recommed using [Visual Studio Code](https://code.visualstudio.com), it's a great app for code editing that comes with additional features such as code debugging, GitHub connection, and supports a ton of languages. It's my favourite editor (what im currently using to write this document in) and is great for writing scripts and working with your files. 
+
+### GitHub
+COMPLETE ME I'd really recommend setting up a GitHub account - it's brilliant way to 
+
+### RDS account setup
+COMPLETE ME
 
 ### R and R Studio
 To start off with, let's look at R. 
@@ -35,10 +41,11 @@ Installing Xcode and GNU Fortran are both important steps for using R because so
 
 #### R Studio
 
-When you first open R Studio, you will see three windows. On your left, you have a tab open with the options *Console*, *Terminal*, and *Background Jobs*. Top right you have a window that shows your environment, history, conections, and tutorial. Bottom right, you have a window that shows files, plots, packages, help, viewer, and presentation. What we first want to do is install two important packages that we will need when running our data analysis. The first one to install is called **Processx**. 
+When you first open R Studio, you will see three windows. On your left, you have a tab open with the options *Console*, *Terminal*, and *Background Jobs*. Top right you have a window that shows your environment, history, conections, and tutorial. Bottom right, you have a window that shows files, plots, packages, help, viewer, and presentation. 
 
+What we first want to do is install two important packages that we will need to run data analysis. The first one to install is called **Processx**. This is a tool that is used to run system processes in the background among other things, but what is important is that we need it to install the next package **devtools**. Devtools is used to to simplify many common tasks and is used to build packages. 
 
-
+To install these packages, in your bottom right window, select **Packages**. Now you should see a tab **Install**. A window should pop up, and under **Packages (separate multiple with space or comma)** type in *processx*, select it and click **Install**. Now do the same for *devtools*. Once you have done this, you usually need to restart RStudio. 
 
 ### Command Line
 
