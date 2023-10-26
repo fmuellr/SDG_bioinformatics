@@ -7,9 +7,9 @@ An overview to setting up your computer for computational analysis in the Di Gio
 ## The research data store and high performance computing
 
 ### HPC account setup
-Setting up your High Performance Computing account at Imperial is essential. This will allow you to carry out intensive and complex tasks using your laptop or computer without requiring high processor and avoid clogging up your laptop.
+Setting up your High Performance Computing account at Imperial is essential. This will allow you to carry out intensive and complex tasks using your laptop or computer without requiring high processor and avoid clogging up your laptop. 
 
-You will need to discuss setting up your account with your PI or a user who has admin authorisation to add you to the list. This can be done by following the instructions for [Get Access](https://www.imperial.ac.uk/admin-services/ict/self-service/research-support/rcs/get-access/) under *Get access to High Performance Computing* and selecting *registering members of your group*.  Next, your PI should also set up a research data store (RDS)project for you. This is a 2 TB space you can use to store, analyse and process your data. This can either be set up as your personal space or as a collective space which multiple users can access - this will change depending on the nature of your project. 
+You will need to discuss setting up your account with your PI or a user who has admin authorisation to add you to the list. Simone already has an account **hpc-sdigiova**. If you are a post-doc, PhD, and research postgrad student, you will need to ask Simone to register you. This can be done by following the instructions for [Get Access](https://www.imperial.ac.uk/admin-services/ict/self-service/research-support/rcs/get-access/) under *Get access to High Performance Computing* and selecting *registering members of your group*.  Next, your PI should also set up a research data store (RDS)project for you. This is a 2 TB space you can use to store, analyse and process your data. This can either be set up as your personal space or as a collective space which multiple users can access - this will change depending on the nature of your project. 
 
 There are no [charges](https://www.imperial.ac.uk/admin-services/ict/self-service/research-support/rcs/service-offering/charging-structure/) asscoaited with account creation however the RDS project has a monthly charge, though it is very low. 
 
@@ -23,11 +23,15 @@ The first and easiest is to connect using [MACs *Connect to server...*](https://
 - This will bring up a window where you have three folders, **ephemeral**, **home**, and **projects**. Your two most important folders are your **home** and **projects** folders.
 
 ### Accessing the HDS off campus
-As you might be off campus to do some of this work, you should 
+As you might be off campus to do some of this work, you will need access to the Imperial network in order to access the system and use its faciilities. 
 
-### Transferring files using Globus 
+While Imperial is rolling out its new **Unified Access**, just use [OpenVPN Connect](https://openvpn.net/client/) instead.  Download it and follow the instructions. When you use it the first time, you will need to download and open the OpenVPN configuration files found [here](https://www.imperial.ac.uk/admin-services/ict/self-service/connect-communicate/remote-access/virtual-private-network-vpn/). Under MacOS, click **download the OpenVPN** file. Once downloaded, click it and it should open in OpenVPN connect. Connect using your college username and password. 
 
-### Transferring files using FileZilla
+### Transferring files between your computer and the HPC cluster 
+
+#### Using Gloubs
+
+#### Using FileZilla
 > reference to geo transfer. 
 
 ## Programme Installation and Setup
