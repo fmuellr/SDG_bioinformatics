@@ -1,14 +1,10 @@
-# 👆 Introduction to Bioinformatics
+# 👆 Introduction to Bioinformatics: The research data store and high performance computing
 
-An overview to setting up your computer for computational analysis in the Di Giovanni lab
+An overview to setting up your research data store account and using Imperial's HPC
 
 >  🛠️ Mac Version: Apple M1 Max, Ventura 13.5.1 // Oct 2023
 
-
-
-## The research data store and high performance computing
-
-### HPC account setup
+## HPC account setup
 Setting up your High Performance Computing account at Imperial is essential. This will allow you to carry out intensive and complex tasks using your laptop or computer without requiring high processing power. 
 
 You will need to discuss setting up your account with your PI or a user who has admin authorisation to add you to the list. Simone already has an account **hpc-sdigiova**. If you are a post-doc, PhD, and research postgrad student, you will need to ask Simone to register you. This can be done by following the instructions for [Get Access](https://www.imperial.ac.uk/admin-services/ict/self-service/research-support/rcs/get-access/) under *Get access to High Performance Computing* and selecting *registering members of your group*.  
@@ -16,7 +12,7 @@ Next, your PI or admin user should  set up a research data store (RDS) project f
 
 There are no [charges](https://www.imperial.ac.uk/admin-services/ict/self-service/research-support/rcs/service-offering/charging-structure/) associated with account creatio, however the RDS project has a monthly charge, though it is very low. 
 
-#### Connecting to the RDS
+### Connecting to the RDS
 To connect to your project, there are several options. If you are working within the Imperial network, make sure you are connected to **Imperial-WPA wifi**. If you are doing this outside of the Imperial network, turn your VPN on - see below. 
 The first and easiest is to connect using [*Connect to server...*](https://wiki.imperial.ac.uk/display/HPC/RDS+on+macOS) which will allow you to view and access your files, but not perform any analysis. For that we need to use the Terminal. 
 
@@ -25,12 +21,12 @@ The first and easiest is to connect using [*Connect to server...*](https://wiki.
 - Enter the RDS Directory Path in the Server Address box in this format: `smb://rds.imperial.ac.uk/rds/user/<username>`. For example, in my case this would look like: `smb://rds.imperial.ac.uk/RDS/user/fm2817`. You may be prompted to input your imperial user name (full email, e.g. fm2817@ic.ac.uk) and password.
 - This will bring up a window where you have three folders, **ephemeral**, **home**, and **projects**. Your two most important folders are your **home** and **projects** folders.
 
-#### Accessing the HPC off campus
+### Accessing the HPC off campus
 As you might be off campus to do some of this work, you will need access to the Imperial network in order to access the system and use its facilities. 
 
 While Imperial is rolling out its new Unified Access, just use [OpenVPN Connect](https://openvpn.net/client/) instead.  Download it and follow the instructions. When you use it the first time, you will need to download and open the OpenVPN configuration files found [here](https://www.imperial.ac.uk/admin-services/ict/self-service/connect-communicate/remote-access/virtual-private-network-vpn/). Under MacOS, click **download the OpenVPN** file. Once downloaded, click it and it should open in OpenVPN connect. Connect using your college username and password. 
 
-### But what even is the HPC?
+## But what even is the HPC?
 Before we go into further detail, let's understand some basics. This information has been adapted from the [Beginner's guide to HPC at Imperial](https://imperialcollegelondon.app.box.com/s/fsoiljuf43f7ko4tfvqifbyrfj8yslbi). 
 
 Bioinformatic analysis can persist of intensive, large scale data modeling requiring a lot of computing power. This is where Imperial's HPC cluster comes into play. A **computer cluster** is a set of connected computers that work together as a single system. The main advantage of using this system is that you can run programs, which process large bits of information in parallel, cutting down the time required to analyse your data. 
@@ -59,7 +55,7 @@ Some examples of different types of jobs you can run include:
 - Jobs using GPUs (such as machine learning tasks)
 - Long-running jobs (up to 1000 hr)
 
-### Using the cluster
+## Using the cluster
 All computers in the HPC resource are connected to one parallel file system - the Research Data Store. This gives you access to:
 
 - your home directory `$HOME`- personal working space; 1 TB allocation (up to 10 mil files)
@@ -75,7 +71,6 @@ The first thing you want to do is open you Terminal App on your Mac laptop (or w
 Next we want to login to your person RDS space. To do this type in the Terminal: `ssh your_username@login.hpc.ic.ac.uk`. Replace "your_username" with your Imperial username. You will then be prompted to enter your Imperial password. Do this and hit enter. If you are working from home, make sure your VPN is turned on and connected to Imperial,otherwise you will not be able to access the RDS. 
 
 > You will notice as you type your password, you will not see any letters being typed. This is done for security purposes to protect your personal information. 
-
 
 ![Terminal Login](./Images/Terminal%20Login.png)
 
@@ -96,7 +91,7 @@ Here you can see I am currently connected to login node **login-b**. If you type
 ![Who is connected](./Images/Who.png)
 
 
-#### Running our first job
+## Running our first job
 Great, now that you're logged in, let's set up our system and run our first job!
 
 The main programs that we will be using are R, python and the command line to execute our jobs. When we submit a job, we are going to do this by instructing the **cluster resource manager** to execute our job. This is essential, as mentioned above, you do not want to run a script directly on your login node, no matter how small or quick, because there are only a certain number of login nodes. If all users computed here, the nodes will be overwhelmed and the rest of the cluster will be idle. 
@@ -128,7 +123,7 @@ Some basic commands when looking at modules.
 
 > Where it refers to loading and unloading a module, think about this as opening and closing an App. 
 
-***Setting up Anaconda:***
+### Setting up Anaconda
 **Anaconda** is one of the main modules I use to install many different software packages. I will discuss how to use it in more detail below, but we will need to set it up before we use it. You will only need to do this once. 
 
 In the Terminal, type in:
@@ -144,7 +139,8 @@ This is done only once. Afterwards, use `module load anaconda3/personal` to setu
 
 Anaconda is great because it enables you to create separate environments that contain specific software packages for your projects. This helps to keep everything organised but more importantly, lets you using different versions and avoid something known as dependency conflicts (more later). Frustratingly, not all software developers maintain their software up to date. This means that sometimes software will no longer work if, for example, it is no longer compatible with an updated programming language. To avoid these issues, you can create an environment in Anaconda which serves as a separate, isolated space where you can load older versions which are compatible. 
 
-***Setting up R in Anaconda:***
+***Setting up R in Anaconda***
+
 R and R libraries can be installed using your personal Anaconda. While you can load R modules from the HPC, I find that they don't maintain it up to date and I prefer to start off by using the most recent version of R.
 
 To do this we want to set up an environment in Anaconda that contains R. 
@@ -174,7 +170,7 @@ conda install r-dev-tools
 conda install r-biocmanager
 ```
 
-***Running our first script***
+### Running our first script
 A quick recap: 
 As I mentioned before, the resource manager takes care of sorting your requests into job classes, scheduling your requests, starting jobs when compute resources become available, monitoring jobs, and producing jobs. To communicate with the resource manager, you need to write a shell script (aka a job script) instructing the resource manager what to do for you. Passing your finished script to the resource manager is called **submitting a job**.
 
@@ -188,27 +184,38 @@ First let's create a new working directory in our home folder in the RDS. We can
 
 We are now locating in your *individual allocation* also known as your home folder. This is where you will store scripts, PBS scripts, log and error outputs and where you can also store any software you might need. Now let us create a new folder called "test". To do this use the command `mkdir test`. This is telling the system to make the directory test. A directory is another name for a folder. Now you need to navigate into that directory. To do this we will use the command `cd test`. This is telling the system to change the directory to test. If you run `pwd` again, you will see that you are in `/rds/general/user/your_username/home/test`.
 
-If you want to go back to your home folder, we can use `cd ./..`. This might look a bit strange with all the periods, but what this represents is from your current folder **(.)**, move **(/)**, back one **(..)**. Similarly, to reenter the test folder, we can use `cd ./test`, meaning from your current folder **(.)**, move **(/)**, into the test folder **(test)**. This is how we will navigate within the system. If you are struggling to visualise where you are, you can always look at your RDS folders by using GO > Connect... (see [Connecting to the RDS](#connecting-to-the-rds)). 
+If you want to go back to your home folder, we can use `cd ..`. This might look a bit strange with all the periods, but what this represents is from your current folder **(cd)**, move back one **(..)**. 
 
+In your home folder, if you now type in `ls`, you will now see a list of your files and folders in your home folder. You should see the test folder in this list. 
+
+To reenter the test folder, we can use `cd ./test`, meaning from your current folder **(.)**, move **(/)**, into the test folder **(test)**. 
+
+This is how we will navigate within the system. If you are struggling to visualise where you are, you can always look at your RDS folders by using GO > Connect... (see [Connecting to the RDS](#connecting-to-the-rds)). 
 
 Basic Bash commands:
-- pwd: print working directory - identify where you are currenty located
-- mkdir <name>: make a new folder with a name of your choice. 
-- cd <PATH_TO_FOLDER>: change the directory to a new directly. 
+- `pwd`: print working directory - identify where you are currenty located
+- `mkdir <name>`: make a new folder with a name of your choice. 
+- `cd <PATH_TO_FOLDER>`: change the directory to a new directly. 
+- Use `./` or `./..` to navigate between your folders. 
+- `ls`: list files in your current folder. 
 
-Next, open up Nano (just type in nano and hit enter). You will use nano to write your job script.
+Check out Code Academy's [list of command line commands](https://www.codecademy.com/article/command-line-commands) for some common commands. 
+
+Next, we will create our job script using the text editor called Nano. To open Nano, in the Terminal type open up Nano. Do this by typing in `nano` and hit enter. 
+
+Imperial's HPC uses a resource manager called the *Portable Batch System* or PBS. This system is basically a scheduler, which manages the distribution of jobs across the available nodes in the cluster. This system tries to make the HPC network the most efficient it can be by calculating the best possible allocation of nodes and their resources to the users that need them without having any resources unused and as little waiting time as possible for the users. 
+
+This means, before any script, we need to include commands to the PBS system, telling it how long the job should run for and how many resources it needs. We do this by writing a Shell script, for example, in nano type in the following:
 
 ```bash
-#PBS -l walltime=00:10:00 <- job parameters (time)
-#PBS -l select=1:ncpus=1:mem=1gb <- job parameters (select=node_number)
+#PBS -l walltime=00:10:00 
+#PBS -l select=1:ncpus=1:mem=1gb 
 module load hellohpc <-load software
 hellohpc.py <- your command
 ```
 
-<aside>
-⚙ Note: don't include the <-xxxxxx these are just explanations I have included.
 
-</aside>
+
 
 Now hit control+O to save and give the document a title, eg. submit.pbs. Then hit enter and hit control+X to exit nano.
 
@@ -247,52 +254,4 @@ The system expects the following syntax at the ***top*** of your job script:
 
 #### Using FileZilla
 > reference to geo transfer. 
-
-## Programme Installation and Setup
-
-Most of our analysis will be run using three main languages: Command line, Python, and R. 
-
-You will also need to set up a Research Data Store (RDS) account to give you access to the High Performance Computing (HPC) system at Imperial. This will allow you to perform intensive data analysis that won't clog up your laptop memory. 
-
-In addition to this, we will also set up your personal GitHub account. This is a great way to keep track of all your codes in once place and makes it easy to share your code with publishers when you are submitting papers. 
-
-We will also install some Apps on your laptop, such as Visual Studio Code, R Studio, Jupyter, and Anaconda to get you going. 
-
-These guides are written from the Mac point of view, if you have windows - i can't help you. Just kidding, this information can also be applied for Windows. There are some slight modifications in our setup but the actual data analysis will be the same more or less. 
-
-### Visual Studio Code 
-To write, edit, and view your scripts we need a text editor. While your laptop has a built in text editor (aka the textEdit app), it is very limited. I'd recommend using [Visual Studio Code](https://code.visualstudio.com), it's a great app for code editing that comes with additional features such as code debugging, GitHub connection, and supports a ton of languages. It's my favourite editor (what im currently using to write this document in) and is great for writing scripts and working with your files. 
-
-include here about using this to write PBS scripts -> easier. 
-
-### GitHub
-[Github](https://github.com) place that you can use to organise your codes , keep track of what you've done etc. It is easily shared with journals if they require it. Imperial also offer an introductory course, which can explain the benefits in more detail. 
-
-### R and R Studio
-To start off with, let's look at R. 
- 
-- Before installing R, we need to install several tools that allow R to function correctly on a Mac. One of those tools is [**XQuartz**](https://www.xquartz.org). Open the link and under *Quick Downloads* click the XQuartz package and download it.  Open the package and follow the installation instructions. It is recommended that every time you have a major update on your Mac that you reinstall XQuartz. 
-- We also need to install and setup [**Xcode**](https://developer.apple.com/xcode/). If you don't already have Xcode on your Mac, go to your App Store, search for Xcode and download the App. Then open Xcode and follow the installation instructions. You will need to create a free account when you do this. Once this has completed, we need to setup Xcode. To do this, open the **Terminal** app and type in: `sudo xcode-select --install`. Once this has finishing installing, your Xcode will be setup. 
-- We will also need something known as **GNU Fortran**, because Xcode doesn't contain a Fortran compiler. To do this, navigate to the [Tools](https://mac.r-project.org/tools/) page from CRAN and install the fortran package and follow the download instructions. ![Fortran](./Images/GNU%20Fortran.png). 
-
-Installing Xcode and GNU Fortran are both important steps for using R because some of the tools you will use to analyze your data require a process known as "compile from source". This is because some packages don't come neatly in one downloadable file, but require you to "build" the package together to make a functioning app. Xcode and GNU Fortran enable you to do this. 
-
-- Finally, we can install R. Navigate to the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org). 
-- Select **Download R for macOS**. 
-- Under *Latest release:* navigate to the appropriate download for your Mac. For example, I have an Apple silicon M1 Mac, so I download the R package for Apple silicon (M1/M2) Macs. If you have an Intel Mac, download that package instead. If you have no idea what your Mac is, click the Apple button (top left) and select *About this Mac* and where it says *Chip* you will find this information. 
-- Once R is installed, you can now download [**RStudio**](https://posit.co/download/rstudio-desktop/). Again follow the download instructions. RStudio is an Integrated Development Environment (IDE) and is what we will be using when we run R code. 
-
-#### R Studio
-
-When you first open R Studio, you will see three windows. On your left, you have a tab open with the options *Console*, *Terminal*, and *Background Jobs*. Top right you have a window that shows your environment, history, connections, and tutorial. Bottom right, you have a window that shows files, plots, packages, help, viewer, and presentation. 
-
-What we first want to do is install two important packages that we will need to run data analysis. The first one to install is called **Processx**. This is a tool that is used to run system processes in the background among other things, but what is important is that we need it to install the next package **devtools**. Devtools is used to to simplify many common tasks and is used to build packages. 
-
-To install these packages, in your bottom right window, select **Packages**. Now you should see a tab **Install**. A window should pop up, and under **Packages (separate multiple with space or comma)** type in *processx*, select it and click **Install**. Now do the same for *devtools*. Once you have done this, you usually need to restart RStudio. 
-
-### Command Line
-
-### Python and Jupyter
-
-#### Anaconda
 
