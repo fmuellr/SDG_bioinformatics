@@ -6,11 +6,11 @@ This is an overview of carrying out **Gene Set Enrichment Analysis (GSEA)**, als
 
 Functional analysis pulls from two main databases called **Gene Ontology (GO)** and **Kyoto Encyclopedia of Genes and Genomes (KEGG)**.
 
-(GO)[https://geneontology.org] is the largest database of information on the functions of genes, including on their **biological process**, their **molecular function**, and their **cellular component**, where these relationships are described in a hierarchal parent-child model between nodes. 
+[GO](https://geneontology.org) is the largest database of information on the functions of genes, including on their **biological process**, their **molecular function**, and their **cellular component**, where these relationships are described in a hierarchal parent-child model between nodes. 
 
-(KEGG)[https://www.genome.jp/kegg/] is also a database that describes high-level functions and utilities from the biological system and can include information from the molecular-level, cell, organism, and ecosystem. Often, we use the KEGG pathway as part of our analysis, and it is useful to identify which  genes are involved in which pathways. 
+[KEGG](https://www.genome.jp/kegg/) is also a database that describes high-level functions and utilities from the biological system and can include information from the molecular-level, cell, organism, and ecosystem. Often, we use the KEGG pathway as part of our analysis, and it is useful to identify which  genes are involved in which pathways. 
 
-There are two main programs I recommend for this analysis and I will go through how to use both of them. The first is using the (Database for Annotation, Visualization, and Integrated Discovery)[https://david.ncifcrf.gov], also known as **DAVID**. The second is a program run in the networking App (Cytoscape)[https://cytoscape.org] called **ClueGO**. Both have their pro's and con's, so I usually carry out both sets of analysis and decide which is best for what and how I want to show my data. 
+There are two main programs I recommend for this analysis and I will go through how to use both of them. The first is using the [Database for Annotation, Visualization, and Integrated Discovery](https://david.ncifcrf.gov), also known as **DAVID**. The second is a program run in the networking App [Cytoscape](https://cytoscape.org) called **ClueGO**. Both have their pro's and con's, so I usually carry out both sets of analysis and decide which is best for what and how I want to show my data. 
 
 Finally, I will go through how to visualise the results using barcharts, heatmaps, or dotplots. 
 
@@ -18,7 +18,7 @@ Finally, I will go through how to visualise the results using barcharts, heatmap
 
 One of the main benefits of using DAVID is the vast amount of categories that you obtain as well as various statistical and functional analysis options. However, this is also one of its downsides, meaning it requires more effort and time for appropriate visualisation. As well, due to the nature of how terms are names, particularly when using functional annotations known as KEGG pathways, terms can be non-descriptive or false-descriptive (i.e., the name is not appropriate to your list of gene), but more on this later.
 
-First, lets navigate to the (DAVID homepage)[https://david.ncifcrf.gov]. The click the tab at the top that says *Start Analysis*. You are now presented with a screen divided into two sections: on the left you have three tabs called *Upload*, *List*, and *Background* where you input your data. On the right, you will see the output from your analysis. 
+First, lets navigate to the [DAVID homepage](https://david.ncifcrf.gov). The click the tab at the top that says *Start Analysis*. You are now presented with a screen divided into two sections: on the left you have three tabs called *Upload*, *List*, and *Background* where you input your data. On the right, you will see the output from your analysis. 
 
 ![David_start](./Images/David_a.png)
 
@@ -28,7 +28,7 @@ Select your list of interest, for example a list of DEGs. I usually split these 
 
 Once you have selected your list and your significance, select either the *Gene Name* or the *Ensembl ID* and paste this into the **Step 1: Paste a list** space. 
 
-> If you are missing the gene name, you can use the (Ensembl BioMart)[https://www.ensembl.org/biomart/martview/3fb321400d44779e551346dc093f71c6] to convert the Ensembl ID into gene name. You can also do this in R. 
+> If you are missing the gene name, you can use the [Ensembl BioMart](https://www.ensembl.org/biomart/martview/3fb321400d44779e551346dc093f71c6) to convert the Ensembl ID into gene name. You can also do this in R. 
 
 Once you have pasted the list, we now need to select the appropriate identifier under **Step 2: Select Identifier**. If you have used the Ensembl ID, select **ENSEMBL_GENE_ID**. If you used the gene name, select **OFFICIAL_GENE_SYMBOL**. When using the gene name, you also have an extra step where you need to provide your species of interest, for example Mus Musculus. 
 
