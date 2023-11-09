@@ -80,6 +80,8 @@ This is the template we use to visualise the functional analysis as barcharts, h
 
 ## ClueGO functional analysis in Cytoscape
 
+The benfits of using ClueGO 
+
 ## Interactive network visualisation using GeneTonic
 
 > This requires a dds and DESeq2object, therefore may not be appropriate for all downstream analysis types.
