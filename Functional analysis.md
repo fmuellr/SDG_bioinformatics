@@ -2,6 +2,7 @@
 
 >  🛠️ Nov 2023
 
+
 This is an overview of carrying out **Gene Set Enrichment Analysis (GSEA)**, also known as functional analysis, of a gene list of interest. This is particularly useful for example, if you have a list of differentially expressed genes (DEGs) and you are trying to identify what is their function, where are they located etc. 
 
 Functional analysis pulls from two main databases called **Gene Ontology (GO)** and **Kyoto Encyclopedia of Genes and Genomes (KEGG)**.
@@ -58,7 +59,24 @@ The first thing to do is save this file as an excel file. Once saved, we will or
 
 ![](./Images/David_g.png)
 
-I usually copy this sheet into a new Excel sheet, so that I have an unaltered version of the original table and a new version I can alter. In the new sheet, I remove any categories and any unsignificant Terms from my list. I usually work with two to four main Categories, including **GOTERM_BP_DIRECT**, **GOTERM_CC_DIRECT**, **GEOTERM_MF_DIRECT**, and **KEGG_PATHWAY**. I remove the other Categories. You can keep these if you want, it just depends on what you want to show. I then split the **Term** column into two new columns: **GO ID** and **Name**. To do this, first insert a new column to the right of column B. The select column B, go to Data > text to columns > Delimited > Other > insert **~**, > press finish. Now you can see that for almost all terms, it has split the Term into a GO ID and Name. If you are interested in doing the same for the KEGG category, select all the KEGG Terms, repeat the above step, but under the Delimiter, select **:** and click finish. Now it will have split your KEGG categories too. 
+I usually copy this sheet into a new Excel sheet, so that I have an unaltered version of the original table and a new version I can alter. In the new sheet, I remove any categories and any unsignificant Terms from my list. I usually work with two to four main Categories, including **GOTERM_BP_DIRECT**, **GOTERM_CC_DIRECT**, **GEOTERM_MF_DIRECT**, and **KEGG_PATHWAY**. I remove the other Categories. You can keep these if you want, it just depends on what you want to show. I then split the **Term** column into two new columns: **GO ID** and **Name**. To do this, first insert a new column to the right of column B. The select column B, go to Data > text to columns > Delimited > Other > insert **~**, > press finish. Now you can see that for almost all terms, it has split the Term into a GO ID and Name. If you are interested in doing the same for the KEGG category, select all the KEGG Terms, repeat the above step, but under the Delimiter, select **:** and click finish. Now it will have split your KEGG categories as well.
+
+Now copy this data into a new sheet. This will be where we use various p-value or FDR cutoffs from DAVID to determine the best analysis. For this example, I have chosen a cutoff of p<0.0001. Rank you values by p-value, and remove all rows which don't make the cutoff. 
+
+![](./Images/David_h.png)
+
+Now comes the tedious part, we will organise our terms by similarity. Some terms you can directly see that they are part of the same group, for example *positive regulation of transcription, DNA-templated*, *positive regulation of transcription from RNA polymerase II promoter*, *regulation of transcription, DNA-templated*, etc. I highlight terms that are part of the same group. If you are having trouble grouping them, you can also have a look at how many genes the have in common by looking into column G. This is why it is easier to use Gene name rather than Ensembl ID, because you can see which genes are in each group and don't need to convert Ensembl ID's into gene names. 
+
+![](./Images/David_i.png)
+
+Once you have organised your terms, group like terms with like terms. 
+
+![](./Images/David_j.png)
+
+This is the template we use to visualise the functional analysis as barcharts, heatmaps, or dotplots. My preferred visualisation method is to use dotplots, see below for an example. 
+
+![](./Images/David_k.png)
+
 
 ## ClueGO functional analysis in Cytoscape
 
