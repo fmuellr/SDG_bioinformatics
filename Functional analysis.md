@@ -1,8 +1,14 @@
-# Functional analysis
+# Gene Set Enrichment Analysis
 
 >  🛠️ Nov 2023
 
-This is an overview of carrying out functional analysis of a gene list of interest. This is particularly useful for example, if you have a list of differentially expressed genes (DEGs) and you are trying to identify what is their function, where are they located etc. 
+This is an overview of carrying out **Gene Set Enrichment Analysis (GSEA)**, also known as functional analysis, of a gene list of interest. This is particularly useful for example, if you have a list of differentially expressed genes (DEGs) and you are trying to identify what is their function, where are they located etc. 
+
+Functional analysis pulls from two main databases called **Gene Ontology (GO)** and **Kyoto Encyclopedia of Genes and Genomes (KEGG)**.
+
+(GO)[https://geneontology.org] is the largest database of information on the functions of genes, including on their **biological process**, their **molecular function**, and their **cellular component**, where these relationships are described in a hierarchal parent-child model between nodes. 
+
+(KEGG)[https://www.genome.jp/kegg/] is also a database that describes high-level functions and utilities from the biological system and can include information from the molecular-level, cell, organism, and ecosystem. Often, we use the KEGG pathway as part of our analysis, and it is useful to identify which  genes are involved in which pathways. 
 
 There are two main programs I recommend for this analysis and I will go through how to use both of them. The first is using the (Database for Annotation, Visualization, and Integrated Discovery)[https://david.ncifcrf.gov], also known as **DAVID**. The second is a program run in the networking App (Cytoscape)[https://cytoscape.org] called **ClueGO**. Both have their pro's and con's, so I usually carry out both sets of analysis and decide which is best for what and how I want to show my data. 
 
@@ -32,17 +38,30 @@ Finally, under **Step 3: List Type** select **Gene List** and then press **Submi
 
 ![](./Images/David_b.png)
 
-Now, if you navigate to the *List* tab, you will see it has uploaded your list. Next, we need to upload a **Background**, this is important, because while we can use the provided mus musculus reference, depending on your tissue type, this can slightly vary. The only downside is that because the background is a very large list of genes (usually >20,000), it only lets you submit it using Ensembl ID, meaning that you can't use the Gene name for your gene list. To create your background is very straight forward, select all genes (both DEGs and nonDEGs) from your entire dataset and same the Ensembl ID only in the first column of a .txt file. 
+Now, if you navigate to the *List* tab, you will see it has uploaded your list. You can rename it if you like. Next, we need to upload a **Background**, this is important, because while we can use the provided mus musculus reference, depending on your tissue type, this can slightly vary. The only downside is that because the background is a very large list of genes (usually >20,000), it only lets you submit it using Ensembl ID, meaning that you can't use the Gene name for your gene list. To create your background is very straight forward, select all genes (both DEGs and nonDEGs) from your entire dataset and same the Ensembl ID only in the first column of a .txt file. Or you can paste in the Ensembl ID's under the *Upload* tab. 
 
 ![](./Images/David_c.png)
 
+Once you have submitted your list of interest and your background, if you look on the right had side under **Analysis Wizard** you should see something along the lines of this:
 
+![](./Images/David_d.png)
 
+Here you can see that currently, my list of interest, **List_1** is being analysed with my submitted background, **Background_2**. Click on **Functional Annotation TOol** under Step 2.
 
+![](./Images/David_e.png)
+
+Click on **Functional annotation chart**, wait for it to load, and then right click **Download File** and select **Save as** and save it in a folder of your choice. Open this file used **Excel**. When you load it, you will see a large list of Terms amongst other important bits of information. 
+
+![](./Images/David_f.png)
+
+The first thing to do is save this file as an excel file. Once saved, we will organise the list. First, we will organise it by category, and then use Excels *conditional formatting* function to select all category with a p-value <0.05, <0.01, and <0.001. I also do the same for FDR. At the end, your list should look like this:
+
+![](./Images/David_g.png)
+
+I usually copy this sheet into a new Excel sheet, so that I have an unaltered version of the original table and a new version I can alter. In the new sheet, I remove any categories and any unsignificant Terms from my list. I usually work with two to four main Categories, including **GOTERM_BP_DIRECT**, **GOTERM_CC_DIRECT**, **GEOTERM_MF_DIRECT**, and **KEGG_PATHWAY**. I remove the other Categories. You can keep these if you want, it just depends on what you want to show. I then split the **Term** column into two new columns: **GO ID** and **Name**. To do this, first insert a new column to the right of column B. The select column B, go to Data > text to columns > Delimited > Other > insert **~**, > press finish. Now you can see that for almost all terms, it has split the Term into a GO ID and Name. If you are interested in doing the same for the KEGG category, select all the KEGG Terms, repeat the above step, but under the Delimiter, select **:** and click finish. Now it will have split your KEGG categories too. 
 
 ## ClueGO functional analysis in Cytoscape
 
-## Alternative programs to use
+## Interactive network visualisation using GeneTonic
 
-revigo
-panther
+> This requires a dds and DESeq2object, therefore may not be appropriate for all downstream analysis types.
