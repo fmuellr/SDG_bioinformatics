@@ -204,3 +204,5 @@ How can we compare different ML methods for the same taks?
 -small value k is used (5 maybe 10). and tarin on (k-1) subsets. 
 - coefficient of determination: linear regression is better than the tree 98% of the time. 
 - constant model : expect it to perform worse. expect ~0
+
+https://davemcg.github.io/post/are-you-in-genomics-stop-using-roc-use-pr/
