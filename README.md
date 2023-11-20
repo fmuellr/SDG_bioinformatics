@@ -18,6 +18,7 @@ If you have no previous coding experience, this can feel a bit daunting, but thi
 These will give you the fundamentals from which you can build on, if you are interested in learning more. Make sure to book these as soon as possible because the spaces get filled very quickly. 
 
 ## Other resources
+- From Imperial's Research Computing and Data Science, they have an overview of all course materials on their [Wiki](https://wiki.imperial.ac.uk/display/ICRCC/Research+Computing+and+Data+Science+materials). 
 - [Code Academy](https://www.codecademy.com) They have many courses, but they also have docs, cheat sheets, and much more. 
 - [Biostars](https://www.biostars.org) is great for any questions you have or errors you come across that you're struggling to solve. Or if you want to write a code in a particular way, usually you'll find that people have already written somehting similar, which makes it easier for you. 
 - [Bioconductor](https://bioconductor.org) for R specific coding. The majority of the packages that we use are from Bioconductor, as this is the main R-specific site for data analysis. 

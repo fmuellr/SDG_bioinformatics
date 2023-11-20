@@ -28,7 +28,7 @@ As you might be off campus to do some of this work, you will need access to the 
 While Imperial is rolling out its new Unified Access, just use [OpenVPN Connect](https://openvpn.net/client/) instead.  Download it and follow the instructions. When you use it the first time, you will need to download and open the OpenVPN configuration files found [here](https://www.imperial.ac.uk/admin-services/ict/self-service/connect-communicate/remote-access/virtual-private-network-vpn/). Under MacOS, click **download the OpenVPN** file. Once downloaded, click it and it should open in OpenVPN connect. Connect using your college username and password. 
 
 ## But what even is the HPC?
-Before we go into further detail, let's understand some basics. This information has been adapted from the [Beginner's guide to HPC at Imperial](https://imperialcollegelondon.app.box.com/s/fsoiljuf43f7ko4tfvqifbyrfj8yslbi). 
+Before we go into further detail, let's understand some basics. This information has been adapted from the [Beginner's guide to HPC at Imperial](https://wiki.imperial.ac.uk/display/HPC/Courses) and also from the [HPC Wiki](https://wiki.imperial.ac.uk/display/HPC/Getting+started), which contains further information if you require. 
 
 Bioinformatic analysis can persist of intensive, large scale data modeling requiring a lot of computing power. This is where Imperial's HPC cluster comes into play. A **computer cluster** is a set of connected computers that work together as a single system. The main advantage of using this system is that you can run programs, which process large bits of information in parallel, cutting down the time required to analyse your data. 
 
@@ -221,43 +221,79 @@ In our script, there are two main components: (1) what resources our job needs a
 
 For the first component, we specify how many resources we need. In our above example, we use the command `#PBS -l walltime=00:10:00` to tell the PBS system that we need to run the job for 10 mins. This is the first thing you include in every job script. The time is in the format hh:mm:ss. 
 
-Next, we use the command `#PBS -l select=1:ncpus=1:mem=1gb`. Here we are telling the system how many nodes (select=1), CPU's (ncpus=1), and memory (mem=1gb) we need. 
+Next, we use the command `#PBS -l select=1:ncpus=1:mem=1gb`. Here we are telling the system how many nodes (select=1), number of cores on one node (ncpus=1), and memory per node (mem=1gb) we need.
 
+Now we come to part 2: the command. For this example, we are telling the system to load a module called hellohpc and run the python (py) script *hellohpc.py*. 
 
+For some additional commands see below.
 
-Now press control+X to exit nano so we can submit our job. First, lets check what we wrote again and see if we made any errors. To do this, use `cat submit.pbs`.
+![](./Images/resource_manager.png)
 
-This should print the job script you just wrote. Now let us submit the script using `qsub submit.pbs`. This should give you a job ID, eg. 126610.pbs.
+Now press control+X to exit nano so we can submit our job. First, lets check what we wrote again and see if we made any errors. To do this, use `cat test.pbs`. This prints the job script you just wrote. Now let us submit the script using `qsub submit.pbs`. This should give you a job ID, eg. 126610.pbs.
 
-If you want to check the status of your job, use `qstat` to check IDs for all jobs, or `qstat job_ID` for a specific job ID. Use `ll *job_ID` to check the output of you submit.
+If you want to check the status of your job, use `qstat` to check the status for all jobs, or `qstat job_ID` for a specific job ID. Use `ll *job_ID` to check the output of you submit. You can also delete a just by using `qdel job_ID`.
 
-A little more info about PBS aka **Portable Batch System**. This is a system designed to manage the distribution of batch jobs and interactive sessions across the available nodes in the cluster. Below, I've included some basic commands to know.
+Below, I've included some basic commands to know.
 
 **Resource manager commands:**
 
 - `qsub your_script` - submit your job and system returns a job id
 - `qstat` or `qstat job_ID` - short overview of your jobs
 - `qdel job_ID` - to remove a job from the system
-    
-    <aside>
-    💡 Note: it takes a few minutes for you to see an update.
-    
-    </aside>
-    
 - `ll *job_ID` - to check the files produced: the top file are any error messages that may have occurred; the bottom one is the screen output and resource manager messages.
 - `more filename.pbs.oxxxxx` - to view your text file `o` Check that it's the file number starting with o and not e.
 
-**Syntax:**
+Aside from your output, every script produces two log files called the log error and the lo screen output. They can be identified by the *e* or *o* at the end of the file name. 
 
-The system expects the following syntax at the ***top*** of your job script:
+![](./Images/logs.png)
+
+If we run `cat test.pbs.o_job_ID` we now see a message from our script!
+
+![](./Images/test_message.png)
+
+You can also run an **interactive session** if you are interested in the progress of your script. To do this, you can ask for resources directly on the command line using qsub -I (capital i). When you get the prompt back, the resource manager will place you on a compute node. You can proceed working directly on the command line (within your resource requirement). eg. `qsub -I -l walltime=00:10:00 -l select=1:ncpus=1:mem=1gb`. Note that we don't include the second component here i.e., no commands. We do this after the interactive session has started. 
+
+### **Job Duration Requirement**
+
+This specifies how long you expect the program to run. Sensible values are 30 min, 24 hr, 48 hr, or 72 hr. There is little benefit selecting intermediate values.
+
+In some cases, specific time can be extended using the RCS self-service page. If you job is eligible for extension, the option will appear on: https://selfservice.rcs.imperial.ac.uk/jobs.
+
+If possible, use checkpoints i.e. save intermediate results that can be used to restart your program - so in our case, don't run all programs without any checks, but after each stage have a checkpoint. it is possible to run jobs longer than 72 hr one at a time.
+
+### **Memory Requirement**
+
+When you run a program, the program and data are read into the main memory (RAM). The data is processed in the memory and eventually written out (onto a screen or into a file on the disk). The resource manager needs an approximate information about how much RAM your program requires. The majority of programs that do not deal with lots of data need no more than 2 GB of RAM. But if your program reads large data files, ask for more memory. If in doubt, start with 2 GB, then the resource will terminate your program and place a message into a log file. In this case, increase the memory requirement and run again. We will probably need more GB - I will add estimate once I begin.
+
+### **Number of Parallel Processes**
+
+Your program may be capable of parallel execution. If you are not sure, read the manual, ask your colleagues, or check HPC logs that specify how many cores your program tries to use. Bear in mind that even if your software runs in parallel, it does not automatically mean that it will run much faster on a given dataset. 
+
+There are two main methods, the first one is called a threaded OpenMP job, where you can share memory between multiple cores on a single node.  
+In your script, increase the ncpus count and memory (to accommodate more cores) and add the *ompthreads* parameter (ompthreads is always equal or less than ncpus).
+This is something we can use, for example, when running Salmon for RNA-seq analysis. Salmon has the possibility of being threaded, therefore we can use ompthreads to allow parallel processing.
+
+![](./Images/omps.png)
+
+If memory doesn't need to be shared, you can instead submit an MPI job, which runs on multiple cores and on multiple nodes. In your script, state the number of nodes using `select`. The rest of the parameters (ncpus, mem, and mpiprocs) state the requirements per one node. Again, mpiprocs are always equal (or less than) ncpus.
+
+![](./Images/mpi.png)
 
 
+You need to make sure your jobs fit one of the job requirements and into one of the classes. 
+
+![](./Images/job_size_1.png)
+![](./Images/job_size_2.png)
+
+If you are working with more intensive computational analysis (i.e., AI/deep learning, machine learning models) or graphics, you can also use **GPUs** aka Graphics Processing Unit. These offer better performance for parallel workloads compared to traditional CPUs. For more details, look at the [HPC wiki](https://wiki.imperial.ac.uk/pages/viewpage.action?spaceKey=HPC&title=HPC+Clusters+Specification). This also has more information on running parallelism with arrays,  some OpenMP and MPI examples, and also example of using mpi4py. 
+
+### PBS environment
+
+While we received an output from the job above, if we now want to specify input and output files and folder locations, the job no longer works. That is because it runs in a specific folder called **tmpdir** aka a temporary directory. If you look back to your output from your test.pbs script, you can see that your job was submitted from your home folder, **but was =executed in the ephemeral folder called tmpdir**. If you remember from earlier, you have three main folders: your home folder, the archive folder, and a third one called Ephemeral. The Ephemeral folder is a great space to work because there is no limit on space, you can put 10 TB of data in there if you want, BUT it will only be in that folder for 30 days before being deleted. Because it has no size limit, it also offers a great place to run intensive jobs that you don't want to run from your home folder. Generally for sequencing analysis, we will not run into this issue, and can execute from our home folder as normal. To do this, after we load our module but before we specify our commands, we simply change our directly back into the home folder: `cd $PBS_O_WORKDIR`.
+
+![](./Images/PBS_home.png)
+
+There are also options to use the resource manages with RStudio or Jupyter Notebooks, for information have a look at the [Wiki](https://wiki.imperial.ac.uk/display/HPC/Courses). 
 
 
-### Transferring files between your computer and the HPC cluster 
-
-#### Using Globus
-
-#### Using FileZilla
-> reference to geo transfer. 
 

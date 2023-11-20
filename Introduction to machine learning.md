@@ -206,3 +206,60 @@ How can we compare different ML methods for the same taks?
 - constant model : expect it to perform worse. expect ~0
 
 https://davemcg.github.io/post/are-you-in-genomics-stop-using-roc-use-pr/
+
+
+Part 2 - continue
+
+metrics for classification
+They depend on the confusion matrix: if the image, the predictions are on the left and the "ground truth" aka the real values on the top 
+the labels are called y and the features are called x
+y with a hat is a prediction of 0 or 1, while the real y is just y 
+
+if it was predicted yes and was yes -> true positive
+If it was predicted no and was no -> true negarive
+if was predicted yes and was no -> false positive
+if predicted no and was yes -> false negative
+
+if we add up the rows we get the number of positive and negative predictions 
+if we add up the columns we get the number of positives and negative ground truths. 
+and then the big N is the total number of predictions made. 
+
+these numbers can be used to make measurements of performance. 
+there is not a single evaluation method that caputres everything about how a model is performing
+there is a trade of between sensitivity (the proportion of the actual potitives that are detected ) and specificity (the proportion of actual negatives that are detected)
+    -> so this basically means there is a trade off of how sensisitve you can be (reduce the number of false negatives) or being more specific (reduce false positives)
+precision: the proportion predicted positives that are correct
+accuracy: the proportion of total number of predictions made that are correct. 
+
+A high accuracy does not always mean that the model is performing well because accuracy depends on the balance of positives and negatives 
+
+ROC -> receiver operating characteristic (also known as AUC: area under the ROC curve) - > there was an article that came out about this from david dude that made the cowplot lesson, read this
+
+can change the threshold -> change the performance of the model. for excample, in the study example, if you push it to the left (lower probability of passing) it maximises sensitivity, but reduces specificity (more will pass)
+on the other extreme, corrrectly input fails, but predicting passes now lower (so increased specificity, but reduced sensitivity)
+
+so can move threshold and capture these cahnges and plot that on a graph ->ROC
+y: sensitivity
+x: 1- specificity 
+so perfect classifier is 1 sensitivity, and 0 specificity (top left corner)
+good way to compare the performance of different classifiers
+often in the results of machine learning experiemnts 
+
+Lets look at this on orange: 
+trying to predict recurrance vs no-recurrance
+
+try and use two methods: tree and logistic regressoin 
+
+## Improving performance
+
+Bias versus variance have special meanings when talking about ML
+
+the model is too somple: underfitting -> systematic error in the predictions (high bias situation) the idea being that the predictions are bias towards the model structure itself -> the model is determinig the shape of the results which is too strong. 
+the model is doing too much work -> overfitting: great training results but not very good testing data. There is a lot of noise in the testing prediction (high variance)
+in the example, a straight line (blue) the best would be a line in the center. but this is not a good model (high bias)
+if we use a curve that tries to fit exactly all of the training data -> results are good, but the testing dataset -> end up with a large errror. high variance
+
+so we are looking for a balance between the two a models 
+you useually find that you ahve high B + LV and LB+LV and LB+ HV, but not HB+HV because the models wont look at that situation
+
+total error: is sum of errors due to bias and variance 
