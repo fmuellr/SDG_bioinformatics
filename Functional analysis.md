@@ -80,7 +80,7 @@ This is the template we use to visualise the functional analysis as barcharts, h
 
 ## ClueGO functional analysis in Cytoscape
 
-The benfits of using ClueGO 
+The benefits of using ClueGO. 
 
 ## Interactive network visualisation using GeneTonic
 
