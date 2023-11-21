@@ -1,4 +1,4 @@
-# 🎶 Introduction to Bioinformatics:  RNA sequencing
+# 🎶 RNA sequencing
 
 >  🛠️ Mac Version: Apple M1 Max, Ventura 13.5.1 // Nov 2023
 
