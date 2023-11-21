@@ -44,3 +44,4 @@ What we first want to do is install two important packages that we will need to 
 
 To install these packages, in your bottom right window, select **Packages**. Now you should see a tab **Install**. A window should pop up, and under **Packages (separate multiple with space or comma)** type in *processx*, select it and click **Install**. Now do the same for *devtools*. Once you have done this, you usually need to restart RStudio. 
 
+## Python in Anaconda

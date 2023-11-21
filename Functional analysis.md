@@ -80,7 +80,54 @@ This is the template we use to visualise the functional analysis as barcharts, h
 
 ## ClueGO functional analysis in Cytoscape
 
-The benefits of using ClueGO. 
+ClueGO is another one of my favourite functional analysis programs because it lets you visualise your terms in a network. Unlike David, it also has the ability to group similar terms and give you a pvalue for that group. 
+
+To use ClueGo, you will first need to download [Cytoscape](https://cytoscape.org), if you don't already have it. Then head to the Cytoscape store and download the [ClueGO app](https://apps.cytoscape.org/apps/cluego). When I first did this, i had to fill out a form to obtain a free license - I am not sure if this is still the case, but the activation code should be sent to your email within 24 hours. 
+
+Once you have downloaded ClueGo and have your activation code, open Cytoscape. Under Apps, select ClueGo. In the left panel are your options and settings. Your results will be shown in the bottom panel, and the network in the network viewer. 
+
+![](./Images/cluego.png)
+
+First select your species of interest. For this example we will select Mus Musculus. Underneath this is an area where you can insert (or upload a .txt file) with your gene list of interest. If this gene list comes from sequencing data, you can test a variety of cutoffs, usually starting with FDR < 0.1 or FDR <0.05. If the lists are too stringent, you can move to more stringent pvalue cutoffs or pvalue + fold change. 
+
+**If you are interested in pathways for both up and downregulated genes...** I usually insert the upregulated genes, then click the + button to add another gene list, and insert the downregulated genes. Then, under visual styles, select **Clusters**. This gives you the unique option to view which categories are more associated with upregulated genes and which are more associated with downregulated genes. 
+
+![](./Images/cluego_clusters.png)
+
+**If you are interested in grouping your gene list by similar pathways...** Start with one list and select the **Groups** option under visual styles. This will now group similar terms associated with your list into nice clusters to give you an overview. 
+
+![](./Images/cluego_groups.png)
+
+**If you are interested in grouping your genes by gene count and significance...** Start with one list and select the **Significance** option. Here, the node size is the number of genes associated with that category and the colour is the significance. If you want to use this as a view option, my tip is to first use the Groups view to identify which terms belong to the same cluster and then using the Significance view. You can then save these networks and pdf files and edit them in Adobe Illustrator to add your group labels.
+
+![](./Images/cluego_sign.png)
+
+Next, we need to setup the ClueGO Settings. The first thing you want to check is the date of your Ontologies/Pathways - if they are not, under *Update Ontologies* select Update GO categories using UniProt... and press update. 
+
+![](./Images/cluego_update.png)
+
+Now we want to select your Ontology/Pathway types. This again depends on what you are interested in. The usual selections include: Biological Process, Cellular Component, Molecular Function, Immune System Process, and KEGG. You can choose all or a combination depending on your interest. When you select them, on the right is a new panel called *Evidence*. Select the second option, **All_Experimental** - this is evidence based from wet lab experiments. If you press the ? next to Evidence, you can read more information about this.  
+
+Now, we want to use the appropriate statistical and grouping settings for our data. First, you want to make sure **Use GO Term Fusion** and **Show only pathways with pV** are selected. For the later, select what you want your GO/KEGG term significance cutoff is. I recommend starting with p < 0.05 and going from there. 
+
+Under **Advanced Term/Pathways Selection Options**:
+- Leave the min and max *Tree Interval* levels as they are. Tree interval refers to how specific or broad you want your pathways to be. 
+- Under *GO Term/Pathway Selection* change the min number of genes to 4 and change the percentage of genes to 2. These two options refer to the min number of genes and what percentage of the total genes are required for a term to be included. 
+- Kappa score: start with the selected option (0.4), you can change this later on. This is used to determine the edge-to-edge connections between shared terms based on the shared genes between them. 
+
+Again, you can adjust all these options later on. For more information about the options, click the ? button. 
+
+Under **Statistical Options**
+- Select Enrichment (Right-sided hypergeometric test) - this selects terms that are positively associated with these genes. You also have options to look at terms that are negatively associated with the genes - again this depends on your question. 
+- Select Bonferroni-Hochberg as a starting point. You can also choose a different option or None. If you do select None, I would change the term pValue to a more stringent value e.g., p <0.0001. 
+- Under Reference, similar to David, insert a list of all gene names form your dataset. 
+
+Then press Start!
+
+In the results tab (under ClueGO - bottom right), you have a list view of all your terms. This also lets you toggle on and off names that show up in your network. If you only inserted one gene list, you should have a tab called **Cluster #1**, which shows you a graph (that you can save as an .svg vector to edit in adobe). If you scroll to the bottom, there is also a nice pie chart representation of your data (again you can save this as an .svg file). 
+If you submitted two gene lists, you usually have three clusters tabs: **Cluster #1**, **Cluster #2**, and **Overview Un-Specific Terms**. Cluster one is associated with the first gene list, number two with the second, and the un-specific terms are what are not specific to either cluster. You also have a log file that tells you which options you used - this is good to save if you need to come back to your analysis. 
+
+If you head to Edge Table (bottom right), you can save this table as an excel file (icon above the table). This lists the terms, the pvalue, the number of genes, which genes are in each term, among other bits of information. 
 
 ## Interactive network visualisation using GeneTonic
 
